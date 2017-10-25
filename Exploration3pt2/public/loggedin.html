@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>User Authentication</title>
+    </head>
+
+    
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBOAr7Yni15wmvwxAs89PgXB10KnkDdHN8",
+            authDomain: "exploration3pt2.firebaseapp.com",
+            databaseURL: "https://exploration3pt2.firebaseio.com",
+            projectId: "exploration3pt2",
+            storageBucket: "exploration3pt2.appspot.com",
+            messagingSenderId: "687602133346"
+          };
+      firebase.initializeApp(config);
+    </script>
+    
+    <body>
+        
+        <script>
+            firebase.auth().onAuthStateChanged(function(user){
+                if(user){
+                    document.body.innerHTML = '<h1> Congrats ' + user.displayName + ', you are done! </h1>';        
+                }
+                else{
+                    console.log("no user signed in");
+                }
+            });
+        </script>
+        <h1>Congrats you did it!</h1>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>List and save your favorite songs!</h1><br><br>
+        Favorite Song: <input type="text" id="input1"><br>
+        Second Favorite Song: <input type="text" id="input2"><br>
+        <button id="saveBtn">SAVE</button>
+        <button id="clearBtn">CLEAR</button>
+        <button id="loadBtn">LOAD</button>
+        <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyDtqE6U_P90ZqtNqV8TvfKyjCQdrJgBxUg",
+            authDomain: "exploration3-ff123.firebaseapp.com",
+            databaseURL: "https://exploration3-ff123.firebaseio.com",
+            projectId: "exploration3-ff123",
+            storageBucket: "exploration3-ff123.appspot.com",
+            messagingSenderId: "806324638486"
+          };
+          firebase.initializeApp(config);
+            
+            var rootRef = 
+            firebase.database().ref().child('inputs');
+            
+            $('#saveBtn').click(function(){
+                rootRef.set({
+                    input1:$('#input1').val(),
+                    input2:$('#input2').val()
+                });
+            });
+            
+            $('#clearBtn').click(function(){
+                    $('#input1').val('');
+                    $('#input2').val('');
+            });
+            
+            $('#loadBtn').click(function(){
+                rootRef.on('value', function(snapshot){
+                $('#input1').val(snapshot.child('input1').val());
+            $('#input2').val(snapshot.child('input2').val());
+                })
+            })
+            
+        </script>
+    </body>
+</html>
